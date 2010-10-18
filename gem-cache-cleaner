@@ -1,0 +1,6 @@
+rm -f /usr/local/lib/ruby/gems/1.8/cache/$1-*.gem
+rm -f /usr/local/lib/ruby/gems/1.8.6/cache/$1-*.gem
+rm -f /usr/local/lib/ruby/gems/1.8.7/cache/$1-*.gem
+rm -f /usr/local/lib/ruby/gems/1.9/cache/$1-*.ge m
+rm -f /usr/local/lib/ruby/gems/1.9.1/cache/$1-*.gem
+rm -f /usr/local/lib/ruby/gems/1.9.2/cache/$1-*.gem

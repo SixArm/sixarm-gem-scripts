@@ -1,0 +1,63 @@
+#!/usr/bin/env ruby
+#
+# Open a ruby file and print its header comments to STDOUT.
+# This is usually suitable for making an rdoc file.
+#
+# For this script to work, the header comments must be
+# delimited withing a begin/end block like this:
+#
+#   =begin
+#   Hello
+#   World
+#   =end
+#
+# Example file: myfile.rb
+#   # -- encoding: UTF8
+#   #=begin
+#   #  Hello
+#   #  World
+#   ## The rest of this is private
+#   #  Foo
+#   #  Bar
+#   #=end
+#
+# Example run:
+#
+#   ruby-header-comments-to-rdoc myfile.rb
+#   =>
+#   Hello
+#   World
+#
+# This script will strip a leading comment
+# character (#) and successive spaces.
+#
+# This script will skip any line that begins
+# with a comment character (#) then a typical
+# unix character encoding string like these:
+# 
+#   # -- encoding:
+#   # -- coding:
+#
+# This script is intended for creating public rdoc text,
+# so the script will stop if it sees the double-pound (##)
+# which is a Rubyism for "the rest of this comment is private"
+
+
+input_ruby_filename=ARGV[0]
+File.exist?(input_ruby_filename) or raise "File #{input_ruby_filename} does not exist"
+input=File.new(input_ruby_filename)
+
+# set this to true when you first see the =begin line
+began=false
+
+# loop over each file line
+input.each_line{|line|
+  break if line=~/^##/ 
+  break if line=~/^=end/
+  next if (line=~/^#!/ or line=~/^# -\*- (encoding|coding): /)
+  if line=~/^=begin / then began=true; next; end
+  break if !began and (line=~/^$/ and line=~/^\s+/)
+  if !began then line.sub!(/^# /,'') end
+  puts line
+}
+

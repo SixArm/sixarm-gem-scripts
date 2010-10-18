@@ -1,0 +1,2 @@
+ls -1 */*gem | sed 's#.*/#gem cleanup #; s#.gem#"#; s#-.*##;'
+

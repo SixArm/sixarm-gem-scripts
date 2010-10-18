@@ -1,0 +1,27 @@
+#!/bin/sh
+
+gem_name=`gem-name`
+dst_user=joel
+dst_host=www.sixarm.com
+dst_path=/var/www/sixarm.com/html/git
+dst_port=22
+ssh="ssh -p $dst_port $dst_user@$dst_host"
+#gem_generate_directory=/www/html
+
+$ssh "cd $dst_path/$gem_name && git pull"
+
+# Make the remote directory, if needed
+#$ssh "mkdir -p $gem_generate_directory/gems/$gem_name"
+
+# Copy all the files to the equivalent directory
+#rsync -e "ssh -p $port" --recursive --hard-links --executability --delete --times * $user@$host:$gem_generate_directory/gems/$gem_name/
+#$ssh "chmod +r -R $gem_generate_directory/gems/$gem_name/"
+
+# Copy the gem to the gem directory
+#echo "rsync..."
+#rsync -e "ssh -p $port" *.gem -t $user@$host:$gem_generate_directory/gems/
+
+# Generate the gem files
+#echo "generate..."
+#$ssh "gem generate --backtrace --directory=$gem_generate_directory/"
+
