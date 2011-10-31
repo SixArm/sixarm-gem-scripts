@@ -1,0 +1,6 @@
+#!/bin/bash
+set -o xtrace
+RAILS_ENV=test bundle install --binstubs --path vendor/bundle --without ""
+RAILS_ENV=test bundle exec rake
+RAILS_ENV=test bundle exec rake assets:precompile
+RAILS_ENV=test bundle exec jasmine-headless-webkit

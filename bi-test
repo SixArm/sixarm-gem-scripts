@@ -1,0 +1,3 @@
+#!/bin/bash
+set -o xtrace
+RAILS_ENV=test bundle install --binstubs --path vendor/bundle --without "" "$@"

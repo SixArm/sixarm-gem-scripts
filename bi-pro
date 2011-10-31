@@ -1,0 +1,3 @@
+#!/bin/bash
+set -o xtrace
+RAILS_ENV=production bundle install --binstubs --path vendor/bundle --without development test "$@"
