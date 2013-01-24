@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+#
+# Ruby script to install a gem if it's needed.
+# This script first uses gem list to see if the
+# gem is already installed, matching the exact name.
+#
+# If the gem is installed, then exit.
+# If the gem is not installed, then install it.
+#
+# You can this script whatever you like;
+# I call mine gem-install-fast because it's
+# faster than re-installing a gem each time.
+# 
+# Example:
+#
+#    gem-install-fast json
+#
+name=ARGV[0] and `gem list -i \"^#{name}$\"`.chomp=="true" or `gem install #{name}`
+
+
