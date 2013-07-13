@@ -15,6 +15,6 @@
 #
 #    gem-install-fast json
 #
-name=ARGV[0] and `gem list -i \"^#{name}$\"`.chomp=="true" or `gem install #{name}`
+name=ARGV[0] and `gem list -i "^#{name}$"`.chomp=="true" or `gem install #{name}`
 
 
