@@ -1,3 +1,3 @@
 #!/bin/bash
 set -o xtrace
-RUBYOPT='-rpsych' bundle install --binstubs --path vendor/bundle "$@"
+RUBYOPT='-rpsych' bundle install --path vendor/bundle --binstubs bin/stubs "$@"
