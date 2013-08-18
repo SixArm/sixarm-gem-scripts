@@ -1,20 +1,38 @@
 #!/usr/bin/env ruby
 #
 # Ruby script to install a gem if it's needed.
-# This script first uses gem list to see if the
-# gem is already installed, matching the exact name.
 #
-# If the gem is installed, then exit.
-# If the gem is not installed, then install it.
+# If the gem is missing, then install it.
+# If the gem is present, then do nothing.
 #
-# You can this script whatever you like;
-# I call mine gem-install-fast because it's
-# faster than re-installing a gem each time.
-# 
+# This command calls "gem list" to find what's installed.
+#
 # Example:
 #
-#    gem-install-fast json
+#    gem-install-fast bdoc
 #
-name=ARGV[0] and `gem list -i "^#{name}$"`.chomp=="true" or `gem install #{name}`
+# Example of multiple gems:
+#
+#    gem-install-fast bdoc rdoc sdoc
+#
+# This command can also processes STDIN:
+#
+#    cat gems.txt | gem-install-fast
+#
+names = (ARGV.size > 0) ? ARGV  : STDIN
+
+gem_list = `gem list`.lines.map{|line| line.chomp}
+gem_lookup = Hash[gem_list.map{|line| [line.sub(/ .*/,''), true]}]
+
+names.each{|name|
+  if gem_lookup[name]
+    puts "#{name} [installed]" 
+  else
+    puts "#{name} [installing]" 
+    `gem install #{name}`
+  end
+}
+
+
 
 
