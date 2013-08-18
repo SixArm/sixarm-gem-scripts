@@ -20,11 +20,13 @@
 #    cat gems.txt | gem-install-fast
 #
 names = !ARGV.empty? ? ARGV : STDIN
+names.each{|name| name.chomp!}
 
 gem_list = `gem list`.lines.map{|line| line.chomp}
 gem_lookup = Hash[gem_list.map{|line| [line.sub(/ .*/,''), true]}]
 
 names.each{|name|
+  name.chom
   if gem_lookup[name]
     puts "#{name} [installed]" 
   else
