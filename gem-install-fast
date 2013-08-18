@@ -19,7 +19,10 @@
 #
 #    cat gems.txt | gem-install-fast
 #
-names = !ARGV.empty? ? ARGV : STDIN
+# This gem doesn't do anything with version;
+# this can be a good area for future features.
+
+names = !ARGV.empty? ? ARGV.to_a : STDIN.to_a
 names.each{|name| name.chomp!}
 
 gem_list = `gem list`.lines.map{|line| line.chomp}
